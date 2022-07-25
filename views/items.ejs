@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praveen's assignment</title>
+    <style>
+        div{
+            
+            height: 100px;
+        }
+        body{
+            font-size: 32px;
+            background-color: #FAEBD7;
+
+        }
+
+        .items,.links{
+            padding: 0 40%;
+        }
+
+        .divs{
+            
+            float: left;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="items">
+        <% if (size == 1){ %>
+            <div class="divs">
+                <h1>  <%= items[0] %>   </h1>
+            </div> 
+        <% } else{ %> 
+            <div class="divs"> <h1>     <%= items[0] %>      </h1> </div>
+            <div class="divs"> <h1>     <%= items[1] %>      </h1></div>
+        <% } %> 
+    </div>
+    <div class="links" style="padding: 100px 35%;">
+        <div class="divs" style="width: 200px;">
+            <% if(page>1) {%> 
+                <a href= "/<%= id %>/<%= prev %>" style="cursor:pointer ;"> previous</a>
+            <% } else { %> 
+                <a href= "/<%= id %>/<%= prev %>" style="pointer-events: none; visibility: hidden;"> previous</a>
+            <% } %> 
+        </div>
+
+        <div class="divs" style="width: 200px;">
+            <% if(page< length) {%> 
+                <a href= "/<%= id %>/<%= next %>" style="cursor:pointer ;"> next</a>
+            <% } else { %> 
+                <a href= "/<%= id %>/<%= next %>" style="pointer-events: none; visibility: hidden;"> next</a>
+            <% } %> 
+        </div>
+    </div>
+</body>
+</html>

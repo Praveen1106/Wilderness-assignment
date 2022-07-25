@@ -29,9 +29,43 @@ app.get("/:id",  (req,res) => {
     res.render("index", {
         user : db[index].username,
         items: db[index].items,
+        id : req.params.id
     });
+    console.log(typeof(req.params.id))
 })
 
+var itemsPerPage = 2
+
+app.get("/:id/:page" , (req, res) => {
+    var index = req.params.id.slice(req.params.id.length - 1)
+    parseInt(index)
+
+    var page = req.params.page
+    parseInt(page)
+
+    var startpoint = (page-1) * itemsPerPage 
+    
+    if (page*itemsPerPage > db[index].items.length){
+        var endPoint = db[index].items.length 
+    }
+    else{
+        var endPoint = page*itemsPerPage 
+    }
+
+    var toShow = db[index].items.slice(startpoint,endPoint)
+    console.log(toShow);
+    res.render("items", { 
+        items: toShow,
+        size: toShow.length,
+        prev: page-1,
+        next: parseInt(page)+1,
+        page: page,
+        id: req.params.id,
+        length: db[index].items.length / 2
+        
+    });
+    console.log(page-1,parseInt(page)+1,page)
+})
 
 
 app.post("/:id",  (req,res) => {
@@ -39,13 +73,14 @@ app.post("/:id",  (req,res) => {
 
     var index = req.params.id.slice(req.params.id.length - 1)
     parseInt(index)
-
+    
 
     db[index].username = nName;
     console.log(db[index].username);
     res.render("index", {
         user : db[index].username,
         items: db[index].items,
+        id : req.params.id
     });
 })
 
